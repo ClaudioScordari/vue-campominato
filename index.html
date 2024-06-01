@@ -22,7 +22,15 @@
         <main id="app">
             <div class="container">
                 <h1 class="text-center mb-4">Campominato</h1>
-                               
+
+                <div v-if="gameOver == true" class="text-center">
+                    <h2>Hai perso!</h2>
+
+                    <p>
+                        <button @click="resetGame()">Ricomincia</button>
+                    </p>
+                </div>
+                
                 <!-- board -->
                 <div class="border border-dark d-flex flex-wrap" style="width: 800px; height: 800px; margin: 0 auto;">
 
@@ -30,13 +38,13 @@
                     <div class="border border-dark" 
                         style="width: calc(100% / 10); height: calc(100% / 10);" 
                         v-for="square in squares"
-                        @click="checkBomb(square)">
+                        @click="checkBomb(square)"
+                        :class="setRedClass(square)">
 
                         {{ square }}
                     </div>
 
                 </div>
-
             </div>
         </main>
 

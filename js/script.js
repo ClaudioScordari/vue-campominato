@@ -8,6 +8,10 @@
 
     3 - intercettare click delle caselle
         - se nell'array delle bombe è incluso il numero della casella succede qualcosa
+        - finchè gameOver è false faccio vedere il campo di gioco, se è true dico hai perso senza
+        - mettere classe 'rossa' se nella casella ce la bomba
+    
+    4 - reset del gioco
 
 */
 
@@ -27,9 +31,12 @@ createApp({
             91,  92,  93,  94,  95,  96,  97,  98, 100
         ],
         arrayBombs: [],
+        gameOver: false,
+        foundBomb: false,
     }
   },
   methods: {
+    // riempire l'array delle bombe solo da numeri diversi
     setBombs(max) {
         while (this.arrayBombs.length <= 10) {
             let nBombs = Math.floor(Math.random() * max) + 1;
@@ -39,10 +46,26 @@ createApp({
             }
         }
     },
+    // controlla che la casella è inclusa nell'array delle bombe
     checkBomb(square) {
         if (this.arrayBombs.includes(square)) {
-            alert('Hai perso!');
+            this.foundBomb = true;
+            this.gameOver = true;
         }
+    },
+    // aggiunge la classe rossa in base alle condizioni SOLO alle caselle bomba
+    setRedClass(square){
+        if (this.foundBomb == true && this.arrayBombs.includes(square)) {
+            return 'bg-danger';
+        }
+    },
+    // resetta il gioco
+    resetGame(){
+        this.foundBomb = false;
+        this.gameOver = false;
+        this.arrayBombs = [];
+        this.setBombs(50); // si ottinene di nuovo l'array delle bombe
+        console.log(this.arrayBombs);
     }
   },
   mounted(){
