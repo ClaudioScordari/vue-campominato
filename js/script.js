@@ -15,6 +15,7 @@
 
     5 - do la possibilità di fissare la difficoltà in autonomia, ovvero è il player che fissa 
         con quante bombe vuole giocare
+        - validazione per il numero delle bombe (tra 1 a 99)
 
 */
 
@@ -43,14 +44,19 @@ createApp({
   methods: {
     // fa apparire il tabellone
     startGame(){
-        this.start = true;
 
-        // riempio l'array delle bombe
-        this.setBombs(this.inputBombs);
+        // riempio l'array delle bombe + validazione
+        if (this.inputBombs != 0 && this.inputBombs != 100) {
+            this.setBombs(this.inputBombs);
+            this.start = true;
+        }
+        else {
+            alert('Le bombe possono essere da 1 a 99');
+        }
     },
     // riempire l'array delle bombe solo da numeri diversi
     setBombs() {
-        while (this.arrayBombs.length <= this.inputBombs) {
+        while (this.arrayBombs.length < this.inputBombs) {
 
             // si arriva ad un massimo di 100 il valor che può avere la casella con la bomba
             let nBombs = Math.floor(Math.random() * 100) + 1; 
@@ -59,7 +65,7 @@ createApp({
                 this.arrayBombs.push(nBombs);
             }
         }
-
+        
         console.log(this.arrayBombs);
     },
     // controlla che la casella è inclusa nell'array delle bombe
@@ -81,8 +87,6 @@ createApp({
         this.gameOver = false;
         this.start = false;
         this.arrayBombs = [];
-        this.setBombs(this.inputBombs); // si ottinene di nuovo l'array delle bombe
-        console.log(this.arrayBombs);
     }
   },
   mounted(){
