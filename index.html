@@ -40,11 +40,11 @@
                 </div>
                 
                 <!-- board -->
-                <div style="min-height: 1000px;" :class="start == true ? 'd-block' : 'd-none'" class="border border-primary border-3 d-flex flex-wrap mx-auto">
+                <div style="min-height: 400px;" :class="start == true ? 'd-block' : 'd-none'" class="border border-primary border-3 d-flex flex-wrap mx-auto">
 
                     <!-- caselle -->
                     <div class="border border-dark" 
-                        style="width: calc(100% / 9);" 
+                        style="width: calc(100% / 10);" 
                         v-for="square in squares"
                         @click="checkBomb(square)"
                         :class="setRedClass(square)">
