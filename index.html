@@ -25,9 +25,11 @@
 
                 <!-- bombe del giocatore -->
                 <div v-if="start == false" class="text-center mb-5">
-                    <label for="NBombs" class="fw-bold">Con quante bombe vuoi giocare?</label>
-                    <input v-model="inputBombs" class="d-inline-block ms-3" type="number" min="1" max="49" id="NBombs" required>
-                    <button  @click="startGame()" class="d-block mx-auto mt-2 px-3">GIOCA</button>
+                    <form action="" @submit.prevent="startGame">
+                        <label for="NBombs" class="fw-bold">Con quante bombe vuoi giocare?</label>
+                        <input required v-model="inputBombs" class="d-inline-block ms-3" type="number" min="1" max="49" id="NBombs">
+                        <button type="submit" class="d-block mx-auto mt-2 px-3">GIOCA</button>
+                    </form>
                 </div>
 
                 <!-- modale validazione -->
