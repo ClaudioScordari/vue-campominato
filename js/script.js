@@ -30,6 +30,8 @@
 
     9 - se vinco non devo aver la possibilità di toccare la board
 
+    10 - aggiunta validazione frontend
+
 */
  
 const { createApp } = Vue
@@ -67,7 +69,7 @@ createApp({
             this.goodSqaures = 49 - this.arrayBombs.length;
         }
         else {
-            
+
             // modale per la validazione
             this.showModal = true;
         }
