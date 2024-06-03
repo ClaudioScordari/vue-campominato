@@ -26,7 +26,9 @@
         (forse se ha una certa classe...)
         - creo un array nuovo che contiene solo le caselle che, una volta cliccate, non esplodono
 
-    8 - se vinco do la possibilità di rifarlo facendo comparire un bottone
+    8 - se vinco do la possibilità di rifarlo facendo comparire un bottone (è sempre quello di reset)
+
+    9 - se vinco non devo aver la possibilità di toccare la board
 
 */
  
@@ -49,6 +51,7 @@ createApp({
         inputBombs: 1,
         youWin: false,
         goodSqaures: 0,
+        showModal: false,
     }
   },
   methods: {
@@ -62,10 +65,11 @@ createApp({
 
             // caselle per la vittoria
             this.goodSqaures = 49 - this.arrayBombs.length;
-            console.log('Caselle per la vittoria = ' + this.goodSqaures);
         }
         else {
-            alert('Le bombe possono essere da 1 a 99');
+            
+            // modale per la validazione
+            this.showModal = true;
         }
     },
     // riempire l'array delle bombe solo da numeri diversi
@@ -88,14 +92,13 @@ createApp({
 
         // se non ho vinto posso fare tutto quanto
         if (this.youWin == false) {
-            
+
             // condizione di sconfitta
             if (this.arrayBombs.includes(square)) {
     
                 // game over
                 this.foundBomb = true;
                 this.gameOver = true;
-                alert('Hai perso! Il punteggio è di ' + (this.counter + 1));
             }
             
             // se ha fatto un punto
@@ -105,11 +108,9 @@ createApp({
                 // devo pushare solo quando square non ce nell'array delle bombe e non ce nell'array di quelle salve
                 if (!this.arrayBombs.includes(square) && !this.clickedSafeSquares.includes(square)) {
                     this.clickedSafeSquares.push(square);
-                    console.log('Caselle buone = ' + this.clickedSafeSquares.length);
                 }
             } else {
                 this.clickedSafeSquares.push(square);
-                alert('VITTORIA! Il tuo punteggio è di ' + (this.clickedSafeSquares.length + 1));
                 this.youWin = true;
             }
         }
@@ -133,6 +134,9 @@ createApp({
         this.youWin = false;
         this.arrayBombs = [];
         this.clickedSafeSquares = [];
+    },
+    closeModal(){
+        this.showModal = false;
     }
   },
   mounted(){
