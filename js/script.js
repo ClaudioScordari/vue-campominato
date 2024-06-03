@@ -26,6 +26,8 @@
         (forse se ha una certa classe...)
         - creo un array nuovo che contiene solo le caselle che, una volta cliccate, non esplodono
 
+    8 - se vinco do la possibilità di rifarlo facendo comparire un bottone
+
 */
  
 const { createApp } = Vue
@@ -45,7 +47,7 @@ createApp({
         foundBomb: false,
         start: false,
         inputBombs: 1,
-        counter: 0,
+        youWin: false,
         goodSqaures: 0,
     }
   },
@@ -84,27 +86,32 @@ createApp({
     // controlla che la casella è inclusa nell'array delle bombe
     checkBomb(square) {
 
-        // condizione di sconfitta
-        if (this.arrayBombs.includes(square)) {
-
-            // game over
-            this.foundBomb = true;
-            this.gameOver = true;
-            alert('Hai perso! Il punteggio è di ' + (this.counter + 1));
-        }
-        
-        // se ha fatto un punto
-        if (this.clickedSafeSquares.length < this.goodSqaures){
-
-            // pusho la casella buona nell'array che contiene tutte quelle ok
-            // devo pushare solo quando square non ce nell'array delle bombe e non ce nell'array di quelle salve
-            if (!this.arrayBombs.includes(square) && !this.clickedSafeSquares.includes(square)) {
-                this.clickedSafeSquares.push(square);
-                console.log('Caselle buone = ' + this.clickedSafeSquares.length);
+        // se non ho vinto posso fare tutto quanto
+        if (this.youWin == false) {
+            
+            // condizione di sconfitta
+            if (this.arrayBombs.includes(square)) {
+    
+                // game over
+                this.foundBomb = true;
+                this.gameOver = true;
+                alert('Hai perso! Il punteggio è di ' + (this.counter + 1));
             }
-        } else {
-            this.clickedSafeSquares.push(square);
-            alert('VITTORIA! Il tuo punteggio è di ' + (this.clickedSafeSquares.length + 1));
+            
+            // se ha fatto un punto
+            if (this.clickedSafeSquares.length < this.goodSqaures){
+    
+                // pusho la casella buona nell'array che contiene tutte quelle ok
+                // devo pushare solo quando square non ce nell'array delle bombe e non ce nell'array di quelle salve
+                if (!this.arrayBombs.includes(square) && !this.clickedSafeSquares.includes(square)) {
+                    this.clickedSafeSquares.push(square);
+                    console.log('Caselle buone = ' + this.clickedSafeSquares.length);
+                }
+            } else {
+                this.clickedSafeSquares.push(square);
+                alert('VITTORIA! Il tuo punteggio è di ' + (this.clickedSafeSquares.length + 1));
+                this.youWin = true;
+            }
         }
     },
     // aggiunge la classe rossa in base alle condizioni SOLO alle caselle bomba
@@ -122,8 +129,8 @@ createApp({
         this.foundBomb = false;
         this.gameOver = false;
         this.start = false;
-        this.counter = 0;
         this.goodSqaures = 0;
+        this.youWin = false;
         this.arrayBombs = [];
         this.clickedSafeSquares = [];
     }

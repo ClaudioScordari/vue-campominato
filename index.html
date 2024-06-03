@@ -38,6 +38,15 @@
                         <button @click="resetGame()">Ricomincia</button>
                     </p>
                 </div>
+
+                <!-- win -->
+                <div v-if="youWin == true" class="text-center">
+                    <h2>Hai vinto!</h2>
+
+                    <p>
+                        <button @click="resetGame()">Ricomincia</button>
+                    </p>
+                </div>
                 
                 <!-- board -->
                 <div style="min-height: 400px;" :class="start == true ? 'd-block' : 'd-none'" class="border border-dark border-2 d-flex flex-wrap mx-auto">
