@@ -21,9 +21,13 @@
         - serve un counter che dovrà andare finchè non beccha la bomba
           se io faccio l'array delle bombe - 100 (caselle totali), so quali sono le caselle pulite
           quando il counter arriva a quel numero ho vinto
+    
+    7 - dare la possibilità di non far aumentare il counter se quella casella è già stata cliccata 
+        (forse se ha una certa classe...)
+        - creo un array nuovo che contiene solo le caselle che, una volta cliccate, non esplodono
 
 */
-
+ 
 const { createApp } = Vue
 
 createApp({
@@ -36,10 +40,11 @@ createApp({
             39,  40,  41,  42,  43,  44,  45,  46,  47,  48,  49,  50,
         ],
         arrayBombs: [],
+        clickedSafeSquares: [],
         gameOver: false,
         foundBomb: false,
         start: false,
-        inputBombs: 25,
+        inputBombs: 1,
         counter: 0,
         goodSqaures: 0,
     }
@@ -53,8 +58,9 @@ createApp({
             this.setBombs(this.inputBombs);
             this.start = true;
 
+            // caselle per la vittoria
             this.goodSqaures = 49 - this.arrayBombs.length;
-            console.log('Inizio gioco - caselle buone sono ' + this.goodSqaures);
+            console.log('Caselle per la vittoria = ' + this.goodSqaures);
         }
         else {
             alert('Le bombe possono essere da 1 a 99');
@@ -72,10 +78,13 @@ createApp({
             }
         }
         
+        // array delle bombe
         console.log(this.arrayBombs);
     },
     // controlla che la casella è inclusa nell'array delle bombe
     checkBomb(square) {
+
+        // condizione di sconfitta
         if (this.arrayBombs.includes(square)) {
 
             // game over
@@ -84,23 +93,27 @@ createApp({
             alert('Hai perso! Il punteggio è di ' + (this.counter + 1));
         }
         
-        if (this.counter < this.goodSqaures){
+        // se ha fatto un punto
+        if (this.clickedSafeSquares.length < this.goodSqaures){
 
-            // punteggio aumenta
-            this.counter++;
-            console.log('Il counter è di ' + this.counter);
-            console.log('check di quelle buone ' + this.goodSqaures);
+            // pusho la casella buona nell'array che contiene tutte quelle ok
+            // devo pushare solo quando square non ce nell'array delle bombe e non ce nell'array di quelle salve
+            if (!this.arrayBombs.includes(square) && !this.clickedSafeSquares.includes(square)) {
+                this.clickedSafeSquares.push(square);
+                console.log('Caselle buone = ' + this.clickedSafeSquares.length);
+            }
+        } else {
+            this.clickedSafeSquares.push(square);
+            alert('VITTORIA! Il tuo punteggio è di ' + (this.clickedSafeSquares.length + 1));
         }
-        else if (this.counter == this.goodSqaures) {
-
-            // vittoria
-            alert('VITTORIA! Il tuo punteggio è di ' + (this.counter + 1));
-        }
-        
     },
     // aggiunge la classe rossa in base alle condizioni SOLO alle caselle bomba
     setRedClass(square){
-        if (this.foundBomb == true && this.arrayBombs.includes(square)) {
+
+        if (this.clickedSafeSquares.includes(square)) {
+            return 'bg-success';
+            
+        } else if (this.foundBomb == true && this.arrayBombs.includes(square)) {
             return 'bg-danger';
         }
     },
@@ -109,11 +122,13 @@ createApp({
         this.foundBomb = false;
         this.gameOver = false;
         this.start = false;
+        this.counter = 0;
         this.goodSqaures = 0;
         this.arrayBombs = [];
+        this.clickedSafeSquares = [];
     }
   },
   mounted(){
-    // ...
+    
   },
 }).mount('#app')
