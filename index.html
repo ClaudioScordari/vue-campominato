@@ -50,7 +50,7 @@
                 <div v-if="gameOver == true" class="text-center">
                     <h2 class="text-danger fw-bold">HAI PERSO!</h2>
 
-                    <h4>Hai totalizzato {{ clickedSafeSquares.length }} punti!</h4>
+                    <h4>Hai totalizzato <span class="fw-bold">{{ clickedSafeSquares.length }}</span> punti!</h4>
 
                     <p>
                         <button @click="resetGame()" class="btn btn-primary">Ricomincia</button>
@@ -59,12 +59,12 @@
 
                 <!-- win -->
                 <div v-if="youWin == true" class="text-center">
-                    <h2>Hai vinto!</h2>
+                    <h2 class="text-primary">HAI VINTO!</h2>
 
-                    <h3>Hai totalizzato {{ clickedSafeSquares.length - 1 }} punti!</h3>
+                    <h3>Hai totalizzato il massimo dei punti <span class="fw-bold">{{ clickedSafeSquares.length}}</span>!</h3>
 
                     <p>
-                        <button @click="resetGame()">Ricomincia</button>
+                        <button @click="resetGame()" class="btn btn-primary">Ricomincia</button>
                     </p>
                 </div>
                 

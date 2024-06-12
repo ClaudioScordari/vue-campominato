@@ -68,7 +68,7 @@ createApp({
             this.start = true;
 
             // caselle per la vittoria
-            this.goodSqaures = 25 - this.arrayBombs.length;
+            this.goodSqaures = 49 - this.arrayBombs.length;
         }
         else {
 
