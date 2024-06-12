@@ -24,7 +24,7 @@
                 <h1 class="text-center mb-3 fw-bold">Campominato</h1>
                 
                 <!-- bombe del giocatore -->
-                <div v-if="start == false" class="text-center mb-5">
+                <div v-if="start == false" class="text-center" style="width: 50%; margin: 30px auto;">
                     <h2>
                         Benvenuto su Campominato!
                     </h2>
@@ -34,16 +34,16 @@
                     </h6>
 
                     <form action="" @submit.prevent="startGame">
-                        <label for="NBombs">Con quante bombe vuoi giocare? Seleziona il numero delle bombe e avvia la partita, le bombe vanno da <span class="fw-bold">1</span> a <span class="fw-bold">25</span></label>
-                        <input required v-model="inputBombs" class="d-inline-block ms-3" type="number" min="1" max="25" id="NBombs">
-                        <button type="submit" class="d-block mx-auto mt-2 px-3 btn btn-primary">GIOCA</button>
+                        <label for="NBombs">Con quante bombe vuoi giocare? Seleziona il numero delle bombe e avvia la partita, le caselle sono <span class="fw-bold">50</span> le bombe vanno da <span class="fw-bold">1</span> a <span class="fw-bold">25</span></label>
+                        <input required v-model="inputBombs" class="d-inline-block ms-3 me-3 align-baseline" type="number" min="1" max="25" id="NBombs">
+                        <button type="submit" class="d-inline-block mx-auto mt-2 px-3 btn btn-primary align-baseline">GIOCA</button>
                     </form>
                 </div>
 
                 <!-- modale validazione -->
                 <div class="text-center" v-if="showModal == true" style="width: 50vw; height: 50vh; margin: 0 auto;">
                     <button @click="closeModal()">x</button>
-                    <h3 class="text-danger">Le bombe possono andare da 1 a 49, scegli bene!</h3>
+                    <h3 class="text-danger">Le bombe possono andare da 1 a 25, scegli bene!</h3>
                 </div>
 
                 <!-- game over -->
