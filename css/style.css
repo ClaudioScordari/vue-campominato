@@ -1,11 +1,11 @@
 /* GENERAL */
 
+body {
+    background-color: #8B8B8B;
+}
+
 #board {
-    width: 800px;
-    height: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+    background-color: #C2C2C2;
 }
 
 #square {

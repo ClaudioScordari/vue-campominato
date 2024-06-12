@@ -63,12 +63,12 @@ createApp({
     startGame(){
 
         // riempio l'array delle bombe + validazione
-        if (this.inputBombs != 0 && this.inputBombs != 50) {
+        if (this.inputBombs != 0 && this.inputBombs <= 25) {
             this.setBombs(this.inputBombs);
             this.start = true;
 
             // caselle per la vittoria
-            this.goodSqaures = 49 - this.arrayBombs.length;
+            this.goodSqaures = 25 - this.arrayBombs.length;
         }
         else {
 
@@ -123,7 +123,7 @@ createApp({
     setRedClass(square){
 
         if (this.clickedSafeSquares.includes(square)) {
-            return 'bg-success';
+            return 'bg-primary';
             
         } else if (this.foundBomb == true && this.arrayBombs.includes(square)) {
             return 'bg-danger';
