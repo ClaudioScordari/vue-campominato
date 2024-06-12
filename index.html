@@ -61,10 +61,15 @@
                 </div>
                 
                 <!-- board -->
-                <div style="width: 100%; height: 50vh;" :class="start == true ? 'd-block' : 'd-none'" class="border border-dark border-2 d-flex flex-wrap mx-auto">
+                <div style="width: 100%; height: 50vh;" 
+                    :class="[
+                        start == true ? 'd-block' : 'd-none', 
+                        gameOver == true ? 'no-click' : ''
+                    ]" 
+                    class="border border-dark border-2 d-flex flex-wrap mx-auto">
 
                     <!-- caselle -->
-                    <div class="border" 
+                    <div class="border cells" 
                         style="width: calc(100% / 10);" 
                         v-for="square in squares"
                         @click="checkBomb(square)"

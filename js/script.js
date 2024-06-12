@@ -32,6 +32,8 @@
 
     10 - aggiunta validazione frontend
 
+    11 - se ho perso non devo più toccare la board
+
 */
  
 const { createApp } = Vue
